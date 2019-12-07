@@ -1,0 +1,4 @@
+vendor
+plugins
+composer.lock
+.env
