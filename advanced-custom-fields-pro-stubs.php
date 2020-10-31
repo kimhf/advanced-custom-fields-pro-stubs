@@ -3,7 +3,7 @@
 class ACF
 {
     /** @var string The plugin version number. */
-    var $version = '5.8.9';
+    var $version = '5.9.0';
     /** @var array The plugin settings array. */
     var $settings = array();
     /** @var array The plugin data array. */
@@ -207,6 +207,30 @@ class ACF
      * @return	object
      */
     function new_instance($class)
+    {
+    }
+    /**
+     * Magic __isset method for backwards compatibility.
+     *
+     * @date	24/4/20
+     * @since	5.9.0
+     *
+     * @param	string $key Key name.
+     * @return	bool
+     */
+    public function __isset($key)
+    {
+    }
+    /**
+     * Magic __get method for backwards compatibility.
+     *
+     * @date	24/4/20
+     * @since	5.9.0
+     *
+     * @param	string $key Key name.
+     * @return	mixed
+     */
+    public function __get($key)
     {
     }
 }
@@ -513,221 +537,336 @@ class acf_admin_field_group
     {
     }
 }
-class acf_admin_field_groups
+class ACF_Admin_Field_Groups
 {
-    // vars
-    var $url = 'edit.php?post_type=acf-field-group', $sync = array();
-    /*
-     *  __construct
+    /**
+     * Array of field groups availbale for sync.
      *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @since 5.9.0
+     * @var array
      */
-    function __construct()
+    public $sync = array();
+    /**
+     * The current view (post_status).
+     *
+     * @since 5.9.0
+     * @var string
+     */
+    public $view = '';
+    /**
+     * Constructor.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function __construct()
     {
     }
     /**
-     *  maybe_redirect_edit
+     * Returns the Field Groups admin URL. 
      *
-     *  Redirects the user from the old ACF4 edit page to the new ACF5 edit page
+     * @date	27/3/20
+     * @since	5.9.0
      *
-     *  @date	17/9/18
-     *  @since	5.7.6
-     *
-     *  @param	void
-     *  @return	void
+     * @param	string $params Extra URL params.
+     * @return	string
      */
-    function maybe_redirect_edit()
+    public function get_admin_url($params = '')
     {
     }
-    /*
-     *  current_screen
+    /**
+     * Returns the Field Groups admin URL taking into account the current view. 
      *
-     *  This function is fired when loading the admin page before HTML has been rendered.
+     * @date	27/3/20
+     * @since	5.9.0
      *
-     *  @type	action (current_screen)
-     *  @date	21/07/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	string $params Extra URL params.
+     * @return	string
      */
-    function current_screen()
+    public function get_current_admin_url($params = '')
     {
     }
-    /*
-     *  admin_enqueue_scripts
+    /**
+     * Redirects users from ACF 4.0 admin page.
      *
-     *  This function will add the already registered css
+     * @date	17/9/18
+     * @since	5.7.6
      *
-     *  @type	function
-     *  @date	28/09/13
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function admin_enqueue_scripts()
+    public function handle_redirection()
     {
     }
-    /*
-     *  check_duplicate
+    /**
+     * Constructor for the Field Groups admin page.
      *
-     *  This function will check for any $_GET data to duplicate
+     * @date	21/07/2014
+     * @since	5.0.0
      *
-     *  @type	function
-     *  @date	17/10/13
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function check_duplicate()
+    public function current_screen()
     {
     }
-    /*
-     *  check_sync
+    /**
+     * Sets up the field groups ready for sync.
      *
-     *  This function will check for any $_GET data to sync
+     * @date	17/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	9/12/2014
-     *  @since	5.1.5
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function check_sync()
+    public function setup_sync()
     {
     }
-    /*
-     *  list_table_views
+    /**
+     * Enqueues admin scripts.
      *
-     *  This function will add an extra link for JSON in the field group list table
+     * @date	18/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	3/12/2014
-     *  @since	5.1.5
-     *
-     *  @param	$views (array)
-     *  @return	$views
+     * @param	void
+     * @return	void
      */
-    function list_table_views($views)
+    public function admin_enqueue_scripts()
     {
     }
-    /*
-     *  trashed_post
+    /**
+     * Modifies the admin body class.
      *
-     *  This function is run when a post object is sent to the trash
+     * @date	18/4/20
+     * @since	5.9.0
      *
-     *  @type	action (trashed_post)
-     *  @date	8/01/2014
-     *  @since	5.0.0
-     *
-     *  @param	$post_id (int)
-     *  @return	n/a
+     * @param	string $classes Space-separated list of CSS classes.
+     * @return	string
      */
-    function trashed_post($post_id)
+    public function admin_body_class($classes)
     {
     }
-    /*
-     *  untrashed_post
+    /**
+     * returns the disabled post state HTML.
      *
-     *  This function is run when a post object is restored from the trash
+     * @date	17/4/20
+     * @since	5.9.0
      *
-     *  @type	action (untrashed_post)
-     *  @date	8/01/2014
-     *  @since	5.0.0
-     *
-     *  @param	$post_id (int)
-     *  @return	n/a
+     * @param	void
+     * @return	string
      */
-    function untrashed_post($post_id)
+    public function get_disabled_post_state()
     {
     }
-    /*
-     *  deleted_post
+    /**
+     * Adds the "disabled" post state for the admin table title.
      *
-     *  This function is run when a post object is deleted from the trash
+     * @date	1/4/20
+     * @since	5.9.0
      *
-     *  @type	action (deleted_post)
-     *  @date	8/01/2014
-     *  @since	5.0.0
-     *
-     *  @param	$post_id (int)
-     *  @return	n/a
+     * @param	array $post_states An array of post display states.
+     * @param	WP_Post $post The current post object.
+     * @return	array
      */
-    function deleted_post($post_id)
+    public function display_post_states($post_states, $post)
     {
     }
-    /*
-     *  field_group_columns
+    /**
+     * Customizes the admin table columns.
      *
-     *  This function will customize the columns for the field group table
+     * @date	1/4/20
+     * @since	5.9.0
      *
-     *  @type	filter (manage_edit-acf-field-group_columns)
-     *  @date	28/09/13
-     *  @since	5.0.0
-     *
-     *  @param	$columns (array)
-     *  @return	$columns (array)
+     * @param	array $columns The columns array.
+     * @return	array
      */
-    function field_group_columns($columns)
+    public function admin_table_columns($_columns)
     {
     }
-    /*
-     *  field_group_columns_html
+    /**
+     * Renders the admin table column HTML
      *
-     *  This function will render the HTML for each table cell
+     * @date	1/4/20
+     * @since	5.9.0
      *
-     *  @type	action (manage_acf-field-group_posts_custom_column)
-     *  @date	28/09/13
-     *  @since	5.0.0
-     *
-     *  @param	$column (string)
-     *  @param	$post_id (int)
-     *  @return	n/a
+     * @param	string $column_name The name of the column to display.
+     * @param	int $post_id The current post ID.
+     * @return	void
      */
-    function field_group_columns_html($column, $post_id)
+    public function admin_table_columns_html($column_name, $post_id)
     {
     }
-    function render_column($column, $field_group)
+    /**
+     * Renders a specific admin table column.
+     *
+     * @date	17/4/20
+     * @since	5.9.0
+     *
+     * @param	string $column_name The name of the column to display.
+     * @param	array $field_group The field group.
+     * @return	void
+     */
+    public function render_admin_table_column($column_name, $field_group)
     {
     }
-    /*
-     *  admin_footer
+    /**
+     * Displays a visual representation of the field group's locations.
      *
-     *  This function will render extra HTML onto the page
+     * @date	1/4/20
+     * @since	5.9.0
      *
-     *  @type	action (admin_footer)
-     *  @date	23/06/12
-     *  @since	3.1.8
+     * @param	array $field_group The field group.
+     * @return	void
+     */
+    public function render_admin_table_column_locations($field_group)
+    {
+    }
+    /**
+     * Returns a human readable file location.
      *
-     *  @param	n/a
-     *  @return	n/a
+     * @date	17/4/20
+     * @since	5.9.0
+     *
+     * @param	string $file The full file path.
+     * @return	string
+     */
+    public function get_human_readable_file_location($file)
+    {
+    }
+    /**
+     * Displays the local JSON status of a field group.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	type $var Description. Default.
+     * @return	type Description.
+     */
+    public function render_admin_table_column_local_status($field_group)
+    {
+    }
+    /**
+     * Customizes the page row actions visible on hover.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	array $actions The array of actions HTML.
+     * @param	WP_Post $post The post.
+     * @return	array
+     */
+    public function page_row_actions($actions, $post)
+    {
+    }
+    /**
+     * Modifies the admin table bulk actions dropdown.
+     *
+     * @date	15/4/20
+     * @since	5.9.0
+     *
+     * @param	array $actions The actions array.
+     * @return	array
+     */
+    public function admin_table_bulk_actions($actions)
+    {
+    }
+    /**
+     * Checks for the custom "duplicate" action.
+     *
+     * @date	15/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function check_duplicate()
+    {
+    }
+    /**
+     * Checks for the custom "acfsync" action.
+     *
+     * @date	15/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function check_sync()
+    {
+    }
+    /**
+     * Customizes the admin table subnav.
+     *
+     * @date	17/4/20
+     * @since	5.9.0
+     *
+     * @param	array $views The available views.
+     * @return	array
+     */
+    public function admin_table_views($views)
+    {
+    }
+    /**
+     * Prints scripts into the admin footer.
+     *
+     * @date	20/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
      */
     function admin_footer()
     {
     }
-    /*
-     *  sync_admin_footer
+    /**
+     * Customizes the admin table HTML when viewing "sync" post_status.
      *
-     *  This function will render extra HTML onto the page
+     * @date	17/4/20
+     * @since	5.9.0
      *
-     *  @type	action (admin_footer)
-     *  @date	23/06/12
-     *  @since	3.1.8
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	array $views The available views.
+     * @return	array
      */
-    function sync_admin_footer()
+    public function admin_footer__sync()
+    {
+    }
+    /**
+     * Fires when trashing a field group post.
+     *
+     * @date	8/01/2014
+     * @since	5.0.0
+     *
+     * @param	int $post_id The post ID.
+     * @return	void
+     */
+    public function trashed_post($post_id)
+    {
+    }
+    /**
+     * Fires when untrashing a field group post.
+     *
+     * @date	8/01/2014
+     * @since	5.0.0
+     *
+     * @param	int $post_id The post ID.
+     * @return	void
+     */
+    public function untrashed_post($post_id)
+    {
+    }
+    /**
+     * Fires when deleting a field group post.
+     *
+     * @date	8/01/2014
+     * @since	5.0.0
+     *
+     * @param	int $post_id The post ID.
+     * @return	void
+     */
+    public function deleted_post($post_id)
     {
     }
 }
@@ -1277,9 +1416,7 @@ class ACF_Admin_Upgrade
 class ACF_Admin
 {
     /**
-     * __construct
-     *
-     * Sets up the class functionality.
+     * Constructor.
      *
      * @date	23/06/12
      * @since	5.0.0
@@ -1291,8 +1428,6 @@ class ACF_Admin
     {
     }
     /**
-     * admin_menu
-     *
      * Adds the ACF menu item.
      *
      * @date	28/09/13
@@ -1305,8 +1440,6 @@ class ACF_Admin
     {
     }
     /**
-     * admin_enqueue_scripts
-     *
      * Enqueues global admin styling.
      *
      * @date	28/09/13
@@ -1319,9 +1452,7 @@ class ACF_Admin
     {
     }
     /**
-     * admin_body_class
-     *
-     * Appends the determined body_class.
+     * Appends custom admin body classes.
      *
      * @date	5/11/19
      * @since	5.8.7
@@ -1333,17 +1464,51 @@ class ACF_Admin
     {
     }
     /**
-     * info_page_html
+     * Adds custom functionality to "ACF" admin pages.
      *
-     * Renders the Info page HTML.
-     *
-     * @date	5/11/19
-     * @since	5.8.7
+     * @date	7/4/20
+     * @since	5.9.0
      *
      * @param	void
      * @return	void
      */
-    function info_page_html()
+    function current_screen($screen)
+    {
+    }
+    /**
+     * Sets up the admin help tab.
+     *
+     * @date	20/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function setup_help_tab()
+    {
+    }
+    /**
+     * Renders the admin navigation element.
+     *
+     * @date	27/3/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    function in_admin_header()
+    {
+    }
+    /**
+     * Modifies the admin footer text.
+     *
+     * @date	7/4/20
+     * @since	5.9.0
+     *
+     * @param	string $text The admin footer text.
+     * @return	string
+     */
+    function admin_footer_text($text)
     {
     }
 }
@@ -1914,6 +2079,27 @@ class ACF_Ajax_Check_Screen extends \ACF_Ajax
     {
     }
 }
+class ACF_Ajax_Local_JSON_Diff extends \ACF_Ajax
+{
+    /** @var string The AJAX action name. */
+    var $action = 'acf/ajax/local_json_diff';
+    /** @var bool Prevents access for non-logged in users. */
+    var $public = \false;
+    /**
+     * get_response
+     *
+     * Returns the response data to sent back.
+     *
+     * @date	31/7/18
+     * @since	5.7.2
+     *
+     * @param	array $request The request args.
+     * @return	mixed The response data or WP_Error.
+     */
+    function get_response($request)
+    {
+    }
+}
 class ACF_Ajax_Query extends \ACF_Ajax
 {
     /** @var bool Prevents access for non-logged in users. */
@@ -2132,163 +2318,213 @@ class ACF_Ajax_User_Setting extends \ACF_Ajax
 }
 class ACF_Assets
 {
-    /** @var array Storage for translations */
-    var $text = array();
-    /** @var array Storage for data */
-    var $data = array();
     /**
-     *  __construct
+     * Storage for i18n data.
      *
-     *  description
-     *
-     *  @date	10/4/18
-     *  @since	5.6.9
-     *
-     *  @param	void
-     *  @return	void
+     * @since 5.6.9
+     * @var array
      */
-    function __construct()
+    public $text = array();
+    /**
+     * Storage for l10n data.
+     *
+     * @since 5.6.9
+     * @var array
+     */
+    public $data = array();
+    /**
+     * List of enqueue flags.
+     *
+     * @since 5.9.0
+     * @var bool
+     */
+    private $enqueue = array();
+    /**
+     * Constructor.
+     *
+     * @date	10/4/18
+     * @since	5.6.9
+     *
+     * @param	void
+     * @return	void
+     */
+    public function __construct()
     {
     }
     /**
-     *  add_text
+     * Magic __call method for backwards compatibility.
      *
-     *  description
+     * @date	10/4/20
+     * @since	5.9.0
      *
-     *  @date	13/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	string $name The method name.
+     * @param	array $arguments The array of arguments.
+     * @return	mixed
      */
-    function add_text($text)
+    public function __call($name, $arguments)
     {
     }
     /**
-     *  add_data
+     * Appends an array of i18n data.
      *
-     *  description
+     * @date	13/4/18
+     * @since	5.6.9
      *
-     *  @date	13/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	array $text An array of text for i18n.
+     * @return	void
      */
-    function add_data($data)
+    public function add_text($text)
     {
     }
     /**
-     *  register_scripts
+     * Appends an array of l10n data.
      *
-     *  description
+     * @date	13/4/18
+     * @since	5.6.9
      *
-     *  @date	13/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	array $data An array of data for l10n.
+     * @return	void
      */
-    function register_scripts()
+    public function add_data($data)
     {
     }
     /**
-     *  enqueue_scripts
+     * Registers the ACF scripts and styles.
      *
-     *  Enqueue scripts for input
+     * @date	10/4/18
+     * @since	5.6.9
      *
-     *  @date	13/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	void
+     * @return	void
      */
-    function enqueue_scripts($args = array())
+    public function register_scripts()
     {
     }
     /**
-     *  admin_enqueue_scripts
+     * Enqueues a script and sets up actions for priting supplemental scripts.
      *
-     *  description
+     * @date	27/4/20
+     * @since	5.9.0
      *
-     *  @date	16/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	string $name The script name.
+     * @return	void
      */
-    function admin_enqueue_scripts()
+    public function enqueue_script($name)
     {
     }
     /**
-     *  admin_print_scripts
+     * Enqueues a style.
      *
-     *  description
+     * @date	27/4/20
+     * @since	5.9.0
      *
-     *  @date	18/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	string $name The style name.
+     * @return	void
      */
-    function admin_print_scripts()
+    public function enqueue_style($name)
     {
     }
     /**
-     *  admin_head
+     * Adds the actions needed to print supporting inline scripts.
      *
-     *  description
+     * @date	27/4/20
+     * @since	5.9.0
      *
-     *  @date	16/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	void
+     * @return	void
      */
-    function admin_head()
+    private function add_actions()
     {
     }
     /**
-     *  admin_footer
+     * Extends the add_action() function with two additional features:
+     * 1. Renames $action depending on the current page (customizer, login, front-end).
+     * 2. Alters the priotiry or calls the method directly if the action has already passed.
      *
-     *  description
+     * @date	28/4/20
+     * @since	5.9.0
      *
-     *  @date	16/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	string $action The action name.
+     * @param	string $method The method name.
+     * @param	int $priority See add_action().
+     * @param	int $accepted_args See add_action().
+     * @return	void
      */
-    function admin_footer()
+    public function add_action($action, $method, $priority = 10, $accepted_args = 1)
     {
     }
     /**
-     *  admin_print_footer_scripts
+     * Generic controller for enqueuing scripts and styles.
      *
-     *  description
+     * @date	28/4/20
+     * @since	5.9.0
      *
-     *  @date	18/4/18
-     *  @since	5.6.9
-     *
-     *  @param	type $var Description. Default.
-     *  @return	type Description.
+     * @param	array $args {
+     * 		@type bool $uploader Whether or not to enqueue uploader scripts.
+     * }
+     * @return	void
      */
-    function admin_print_footer_scripts()
+    public function enqueue($args = array())
     {
     }
-    /*
-     *  enqueue_uploader
+    /**
+     * Enqueues the scripts and styles needed for the WP media uploader.
      *
-     *  This function will render a WP WYSIWYG and enqueue media
+     * @date	27/10/2014
+     * @since	5.0.9
      *
-     *  @type	function
-     *  @date	27/10/2014
-     *  @since	5.0.9
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function enqueue_uploader()
+    public function enqueue_uploader()
+    {
+    }
+    /**
+     * Enqueues and localizes scripts.
+     *
+     * @date	27/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function enqueue_scripts()
+    {
+    }
+    /**
+     * Prints scripts in head.
+     *
+     * @date	27/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function print_scripts()
+    {
+    }
+    /**
+     * Prints scripts in footer.
+     *
+     * @date	27/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function print_footer_scripts()
+    {
+    }
+    /**
+     * Prints uploader scripts in footer.
+     *
+     * @date	11/06/2020
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function print_uploader_scripts()
     {
     }
 }
@@ -3833,16 +4069,14 @@ class acf_field_image extends \acf_field
     function input_admin_enqueue_scripts()
     {
     }
-    /*
-     *  render_field()
+    /**
+     * Renders the field HTML.
      *
-     *  Create the HTML interface for your field
+     * @date	23/01/13
+     * @since	3.6.0
      *
-     *  @param	$field - an array holding all the field's data
-     *
-     *  @type	action
-     *  @since	3.6
-     *  @date	23/01/13
+     * @param	array $field The field settings.
+     * @return	void
      */
     function render_field($field)
     {
@@ -7537,69 +7771,188 @@ class acf_form_widget
     {
     }
 }
-class acf_json
+class ACF_Legacy_Locations
 {
-    function __construct()
+    /**
+     * Magic __isset method for backwards compatibility.
+     *
+     * @date	10/4/20
+     * @since	5.9.0
+     *
+     * @param	string $key Key name.
+     * @return	bool
+     */
+    public function __isset($key)
     {
     }
-    /*
-     *  update_field_group
+    /**
+     * Magic __get method for backwards compatibility.
      *
-     *  This function is hooked into the acf/update_field_group action and will save all field group data to a .json file 
+     * @date	10/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	10/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	$field_group (array)
-     *  @return	n/a
+     * @param	string $key Key name.
+     * @return	mixed
      */
-    function update_field_group($field_group)
+    public function __get($key)
     {
     }
-    /*
-     *  delete_field_group
+    /**
+     * Magic __call method for backwards compatibility.
      *
-     *  This function will remove the field group .json file
+     * @date	10/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	10/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	$field_group (array)
-     *  @return	n/a
+     * @param	string $name The method name.
+     * @param	array $arguments The array of arguments.
+     * @return	mixed
      */
-    function delete_field_group($field_group)
+    public function __call($name, $arguments)
     {
     }
-    /*
-     *  include_json_folders
+}
+class ACF_Local_JSON
+{
+    /**
+     * The found JSON field group files.
      *
-     *  This function will include all registered .json files
-     *
-     *  @type	function
-     *  @date	10/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @since 5.9.0
+     * @var array
      */
-    function include_json_folders()
+    private $files = array();
+    /**
+     * Constructor.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function __construct()
     {
     }
-    /*
-     *  include_json_folder
+    /**
+     * Returns true if this component is enabled.
      *
-     *  This function will include all .json files within a folder
+     * @date	14/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	1/5/17
-     *  @since	5.5.13
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	bool.
      */
-    function include_json_folder($path = '')
+    public function is_enabled()
+    {
+    }
+    /**
+     * Writes field group data to JSON file.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	array $field_group The field group.
+     * @return	void
+     */
+    public function update_field_group($field_group)
+    {
+    }
+    /**
+     * Deletes a field group JSON file.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	array $field_group The field group.
+     * @return	void
+     */
+    public function delete_field_group($field_group)
+    {
+    }
+    /**
+     * Includes all local JSON fields.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function include_fields()
+    {
+    }
+    /**
+     * Scans for JSON field groups.
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	array
+     */
+    function scan_field_groups()
+    {
+    }
+    /**
+     * Returns an array of found JSON field group files. 
+     *
+     * @date	14/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	array
+     */
+    public function get_files()
+    {
+    }
+    /**
+     * Saves a field group JSON file.
+     *
+     * @date	17/4/20
+     * @since	5.9.0
+     *
+     * @param	string $key The field group key.
+     * @param	array $field_group The field group.
+     * @return	bool
+     */
+    public function save_file($key, $field_group)
+    {
+    }
+    /**
+     * Deletes a field group JSON file.
+     *
+     * @date	17/4/20
+     * @since	5.9.0
+     *
+     * @param	string $key The field group key.
+     * @return	bool True on success.
+     */
+    public function delete_file($key)
+    {
+    }
+    /**
+     * Includes all local JSON files.
+     *
+     * @date	10/03/2014
+     * @since	5.0.0
+     * @deprecated 5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function include_json_folders()
+    {
+    }
+    /**
+     * Includes local JSON files within a specific folder.
+     *
+     * @date	01/05/2017
+     * @since	5.5.13
+     * @deprecated 5.9.0
+     *
+     * @param	string $path The path to a specific JSON folder.
+     * @return	void
+     */
+    public function include_json_folder($path = '')
     {
     }
 }
@@ -7750,1027 +8103,98 @@ class ACF_Local_Meta
     {
     }
 }
-class acf_locations
+abstract class ACF_Legacy_Location
 {
-    /** @var array Contains an array of location rule instances */
-    var $locations = array();
-    /*
-     *  __construct
+    /**
+     * Constructor.
      *
-     *  This function will setup the class functionality
+     * @date	5/03/2014
+     * @since	5.0.0
      *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function __construct()
+    public function __construct()
     {
     }
-    /*
-     *  register_location
+    /**
+     * Magic __call method for backwards compatibility.
      *
-     *  This function will store a location rule class
+     * @date	10/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	6/07/2016
-     *  @since	5.4.0
-     *
-     *  @param	$instance (object)
-     *  @return	n/a
+     * @param	string $name The method name.
+     * @param	array $arguments The array of arguments.
+     * @return	mixed
      */
-    function register_location($class)
-    {
-    }
-    /*
-     *  get_rule
-     *
-     *  This function will return a location rule class
-     *
-     *  @type	function
-     *  @date	6/07/2016
-     *  @since	5.4.0
-     *
-     *  @param	$name (string)
-     *  @return	(mixed)
-     */
-    function get_location($name)
-    {
-    }
-    /*
-     *  get_rules
-     *
-     *  This function will return a grouped array of location rules (category => name => label)
-     *
-     *  @type	function
-     *  @date	6/07/2016
-     *  @since	5.4.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function get_locations()
+    public function __call($name, $arguments)
     {
     }
 }
-class acf_location_attachment extends \acf_location
+abstract class ACF_Location extends \ACF_Legacy_Location
 {
-    /*
-     *  __construct
+    /**
+     * The location rule name.
      *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @since 5.9.0
+     * @var string
      */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_comment extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_current_user_role extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_current_user extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_nav_menu_item extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_nav_menu extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_page_parent extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_page_template extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_page_type extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_page extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_category extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_format extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  get_post_type
-     *
-     *  This function will return the current post_type
-     *
-     *  @type	function
-     *  @date	25/11/16
-     *  @since	5.5.0
-     *
-     *  @param	$options (int)
-     *  @return	(mixed)
-     */
-    function get_post_type($screen)
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_status extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  get_post_type
-     *
-     *  This function will return the current post_type
-     *
-     *  @type	function
-     *  @date	25/11/16
-     *  @since	5.5.0
-     *
-     *  @param	$options (int)
-     *  @return	(mixed)
-     */
-    function get_post_type($screen)
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_taxonomy extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_template extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  get_post_type
-     *
-     *  This function will return the current post_type
-     *
-     *  @type	function
-     *  @date	25/11/16
-     *  @since	5.5.0
-     *
-     *  @param	$options (int)
-     *  @return	(mixed)
-     */
-    function get_post_type($screen)
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post_type extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  get_post_type
-     *
-     *  This function will return the current post_type
-     *
-     *  @type	function
-     *  @date	25/11/16
-     *  @since	5.5.0
-     *
-     *  @param	$options (int)
-     *  @return	(mixed)
-     */
-    function get_post_type($screen)
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_post extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class acf_location_taxonomy extends \acf_location
-{
-    /*
-     *  __construct
-     *
-     *  This function will setup the class functionality
-     *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
-     */
-    function initialize()
-    {
-    }
-    /*
-     *  rule_match
-     *
-     *  This function is used to match this location $rule to the current $screen
-     *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /*
-     *  rule_operators
-     *
-     *  This function returns the available values for this rule type
-     *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class ACF_Location
-{
-    /** @var string The location rule name. */
     public $name = '';
-    /** @var string The location rule label. */
+    /**
+     * The location rule label.
+     *
+     * @since 5.9.0
+     * @var string
+     */
     public $label = '';
-    /** @var string The location rule category. */
+    /**
+     * The location rule category. 
+     * 
+     * Accepts "post", "page", "user", "forms" or a custom label.
+     *
+     * @since 5.9.0
+     * @var string
+     */
     public $category = 'post';
-    /** @var string The location rule visibility. */
+    /**
+     * Whether or not the location rule is publicly accessible.
+     *
+     * @since 5.0.0
+     * @var bool
+     */
     public $public = \true;
     /**
-     * __construct
+     * The object type related to this location rule.
+     * 
+     * Accepts an object type discoverable by `acf_get_object_type()`.
      *
-     * Sets up the class functionality.
+     * @since 5.9.0
+     * @var string
+     */
+    public $object_type = '';
+    /**
+     * The object subtype related to this location rule.
+     * 
+     * Accepts a custom post type or custom taxonomy.
+     *
+     * @since 5.9.0
+     * @var string
+     */
+    public $object_subtype = '';
+    /**
+     * Constructor.
+     *
+     * @date	8/4/20
+     * @since	5.9.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Initializes props.
      *
      * @date	5/03/2014
      * @since	5.0.0
@@ -8778,62 +8202,887 @@ class ACF_Location
      * @param	void
      * @return	void
      */
-    function __construct()
+    public function initialize()
     {
     }
     /**
-     * add_filter
+     * Returns an array of operators for this location.
      *
-     * Maybe adds a filter callback.
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     * @date	17/9/19
-     * @since	5.8.1
-     *
-     * @param	string $tag The filter name.
-     * @param	callable $function_to_add The callback function.
-     * @param	int $priority The filter priority.
-     * @param	int $accepted_args The number of args to accept.
-     * @return	void
+     * @param	array $rule A location rule.
+     * @return	array
      */
-    function add_filter($tag = '', $function_to_add = '', $priority = 10, $accepted_args = 1)
+    public static function get_operators($rule)
     {
     }
     /**
-     * initialize
+     * Returns an array of possible values for this location.
      *
-     * Sets up the class functionality.
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     * @date	5/03/2014
-     * @since	5.0.0
-     *
-     * @param	void
-     * @return	void
+     * @param	array $rule A location rule.
+     * @return	array
      */
-    function initialize()
+    public function get_values($rule)
     {
     }
     /**
-     * compare
+     * Returns the object_type connected to this location.
      *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string
+     */
+    public function get_object_type($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    public function get_object_subtype($rule)
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
      * Compares the given value and rule params returning true when they match.
      *
      * @date	17/9/19
      * @since	5.8.1
      *
+     * @param	array $rule The location rule data.
      * @param	mixed $value The value to compare against.
-     * @param	array $rule The locatio rule data.
      * @return	bool
      */
-    function compare($value, $rule)
+    public function compare_to_rule($value, $rule)
+    {
+    }
+}
+class ACF_Location_Attachment extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Comment extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Current_User_Role extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Current_User extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Nav_Menu_Item extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Nav_Menu extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Page_Parent extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Page_Template extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Page_Type extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Page extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Post_Category extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    public function get_object_subtype($rule)
+    {
+    }
+}
+class ACF_Location_Post_Format extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Post_Status extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Post_Taxonomy extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    public function get_object_subtype($rule)
+    {
+    }
+}
+class ACF_Location_Post_Template extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    public function get_object_subtype($rule)
+    {
+    }
+}
+class ACF_Location_Post_Type extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    public function get_object_subtype($rule)
+    {
+    }
+}
+class ACF_Location_Post extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Taxonomy extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
+    {
+    }
+    /**
+     * Returns the object_subtype connected to this location.
+     *
+     * @date	1/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	string|array
+     */
+    function get_object_subtype($rule)
     {
     }
 }
 class ACF_Location_User_Form extends \ACF_Location
 {
     /**
-     * initialize
-     *
-     * Sets up the class functionality.
+     * Initializes props.
      *
      * @date	5/03/2014
      * @since	5.0.0
@@ -8841,135 +9090,117 @@ class ACF_Location_User_Form extends \ACF_Location
      * @param	void
      * @return	void
      */
-    function initialize()
+    public function initialize()
     {
     }
     /**
-     * rule_match
+     * Matches the provided rule against the screen args returning a bool result.
      *
-     * Determines if the given location $rule is a match for the current $screen.
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     * @date	17/9/19
-     * @since	5.8.1
-     *
-     * @param	bool $result Whether or not this location rule is a match.
-     * @param	array $rule The locatio rule data.
-     * @param	array $screen The current screen data.
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
      * @return	bool
      */
-    function rule_match($result, $rule, $screen)
+    public function match($rule, $screen, $field_group)
     {
     }
     /**
-     * rule_values
+     * Returns an array of possible values for this rule type.
      *
-     * Returns an array of values for this location rule.
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     * @date	17/9/19
-     * @since	5.8.1
-     *
-     * @param	array $choices An empty array.
-     * @param	array $rule The locatio rule data.
-     * @return	type Description.
-     */
-    function rule_values($choices, $rule)
-    {
-    }
-}
-class ACF_Location_User_Role extends \acf_location
-{
-    /**
-     * initialize
-     *
-     * Sets up the class functionality.
-     *
-     * @date	5/03/2014
-     * @since	5.0.0
-     *
-     * @param	void
-     * @return	void
-     */
-    function initialize()
-    {
-    }
-    /**
-     * rule_match
-     *
-     * Determines if the given location $rule is a match for the current $screen.
-     *
-     * @date	17/9/19
-     * @since	5.8.1
-     *
-     * @param	bool $result Whether or not this location rule is a match.
-     * @param	array $rule The locatio rule data.
-     * @param	array $screen The current screen data.
-     * @return	bool
-     */
-    function rule_match($result, $rule, $screen)
-    {
-    }
-    /**
-     * rule_values
-     *
-     * Returns an array of values for this location rule.
-     *
-     * @date	17/9/19
-     * @since	5.8.1
-     *
-     * @param	array $choices An empty array.
-     * @param	array $rule The locatio rule data.
+     * @param	array $rule A location rule.
      * @return	array
      */
-    function rule_values($choices, $rule)
+    public function get_values($rule)
     {
     }
 }
-class acf_location_widget extends \acf_location
+class ACF_Location_User_Role extends \ACF_Location
 {
-    /*
-     *  __construct
+    /**
+     * initialize
      *
-     *  This function will setup the class functionality
+     * Sets up the class functionality.
      *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
+     * @date	5/03/2014
+     * @since	5.0.0
      *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
     function initialize()
     {
     }
-    /*
-     *  rule_match
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
      *
-     *  This function is used to match this location $rule to the current $screen
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
      */
-    function rule_match($result, $rule, $screen)
+    public function match($rule, $screen, $field_group)
     {
     }
-    /*
-     *  rule_operators
+    /**
+     * Returns an array of possible values for this rule type.
      *
-     *  This function returns the available values for this rule type
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
+     * @param	array $rule A location rule.
+     * @return	array
      */
-    function rule_values($choices, $rule)
+    public function get_values($rule)
+    {
+    }
+}
+class ACF_Location_Widget extends \ACF_Location
+{
+    /**
+     * Initializes props.
+     *
+     * @date	5/03/2014
+     * @since	5.0.0
+     *
+     * @param	void
+     * @return	void
+     */
+    public function initialize()
+    {
+    }
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
+     */
+    public function match($rule, $screen, $field_group)
+    {
+    }
+    /**
+     * Returns an array of possible values for this rule type.
+     *
+     * @date	9/4/20
+     * @since	5.9.0
+     *
+     * @param	array $rule A location rule.
+     * @return	array
+     */
+    public function get_values($rule)
     {
     }
 }
@@ -11399,101 +11630,85 @@ class acf_field_repeater extends \acf_field
     {
     }
 }
-class ACF_Location_Block extends \acf_location
+class ACF_Location_Block extends \ACF_Location
 {
-    /*
-     *  __construct
+    /**
+     * Initializes props.
      *
-     *  This function will setup the class functionality
+     * @date	5/03/2014
+     * @since	5.0.0
      *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function initialize()
+    public function initialize()
     {
     }
-    /*
-     *  rule_match
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
      *
-     *  This function is used to match this location $rule to the current $screen
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
      */
-    function rule_match($result, $rule, $screen)
+    public function match($rule, $screen, $field_group)
     {
     }
-    /*
-     *  rule_operators
+    /**
+     * Returns an array of possible values for this rule type.
      *
-     *  This function returns the available values for this rule type
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
+     * @param	array $rule A location rule.
+     * @return	array
      */
-    function rule_values($choices, $rule)
+    public function get_values($rule)
     {
     }
 }
-class acf_location_options_page extends \acf_location
+class ACF_Location_Options_Page extends \ACF_Location
 {
-    /*
-     *  __construct
+    /**
+     * Initializes props.
      *
-     *  This function will setup the class functionality
+     * @date	5/03/2014
+     * @since	5.0.0
      *
-     *  @type	function
-     *  @date	5/03/2014
-     *  @since	5.0.0
-     *
-     *  @param	n/a
-     *  @return	n/a
+     * @param	void
+     * @return	void
      */
-    function initialize()
+    public function initialize()
     {
     }
-    /*
-     *  rule_match
+    /**
+     * Matches the provided rule against the screen args returning a bool result.
      *
-     *  This function is used to match this location $rule to the current $screen
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	3/01/13
-     *  @since	3.5.7
-     *
-     *  @param	$match (boolean) 
-     *  @param	$rule (array)
-     *  @return	$options (array)
+     * @param	array $rule The location rule.
+     * @param	array $screen The screen args.
+     * @param	array $field_group The field group settings.
+     * @return	bool
      */
-    function rule_match($result, $rule, $screen)
+    public function match($rule, $screen, $field_group)
     {
     }
-    /*
-     *  rule_operators
+    /**
+     * Returns an array of possible values for this rule type.
      *
-     *  This function returns the available values for this rule type
+     * @date	9/4/20
+     * @since	5.9.0
      *
-     *  @type	function
-     *  @date	30/5/17
-     *  @since	5.6.0
-     *
-     *  @param	n/a
-     *  @return	(array)
+     * @param	array $rule A location rule.
+     * @return	array
      */
-    function rule_values($choices, $rule)
+    public function get_values($rule)
     {
     }
 }
@@ -12901,6 +13116,49 @@ function acf_did($name)
 {
 }
 /**
+ * Returns the length of a string that has been submitted via $_POST.
+ *
+ * Uses the following process:
+ * 1. Unslash the string because posted values will be slashed.
+ * 2. Decode special characters because wp_kses() will normalize entities.
+ * 3. Treat line-breaks as a single character instead of two.
+ * 4. Use mb_strlen() to accomodate special characters.
+ * 
+ * @date	04/06/2020
+ * @since	5.9.0
+ *
+ * @param	string $str The string to review.
+ * @return	int
+ */
+function acf_strlen($str)
+{
+}
+/**
+ * Returns a value with default fallback.
+ *
+ * @date	6/4/20
+ * @since	5.9.0
+ *
+ * @param	mixed $value The value.
+ * @param	mixed $default_value The default value.
+ * @return	mixed
+ */
+function acf_with_default($value, $default_value)
+{
+}
+/**
+ * Returns the current priority of a running action.
+ *
+ * @date	14/07/2020
+ * @since	5.9.0
+ *
+ * @param	string $action The action name.
+ * @return	int|bool
+ */
+function acf_doing_action($action)
+{
+}
+/**
  * acf_add_filter_variations
  *
  * Registers variations for the given filter.
@@ -13504,9 +13762,7 @@ function acf_update_metaref($post_id = 0, $type = 'fields', $references = array(
 {
 }
 /**
- * acf_get_post_templates
- *
- * Returns an array of post_type => templates data.
+ * Returns available templates for each post type.
  *
  * @date	29/8/17
  * @since	5.6.2
@@ -13811,6 +14067,19 @@ function acf_delete_value($post_id, $field)
 function acf_preview_value($value, $post_id, $field)
 {
 }
+/**
+ * Returns a WordPress object type.
+ *
+ * @date	1/4/20
+ * @since	5.9.0
+ *
+ * @param	string $object_type The object type (post, term, user, etc).
+ * @param	string $object_subtype Optional object subtype (post type, taxonomy).
+ * @return	object
+ */
+function acf_get_object_type($object_type, $object_subtype = '')
+{
+}
 // class_exists check
 /**
 *  acf_new_admin_notice
@@ -14032,6 +14301,18 @@ function acf_get_data($name)
 *  @return	n/a
 */
 function acf_set_data($name, $value)
+{
+}
+/**
+ * Appends data to an existing key.
+ *
+ * @date	11/06/2020
+ * @since	5.9.0
+ *
+ * @param	string $name The data name.
+ * @return	array $data The data array.
+ */
+function acf_append_data($name, $data)
 {
 }
 /*
@@ -14433,6 +14714,18 @@ function acf_decode_taxonomy_term($value)
  * @return	array
  */
 function acf_array($val = array())
+{
+}
+/**
+ * Returns a non-array value.
+ *
+ * @date	11/05/2020
+ * @since	5.8.10
+ *
+ * @param	mixed $val The value to review.
+ * @return	mixed
+ */
+function acf_unarray($val)
 {
 }
 /*
@@ -14915,18 +15208,15 @@ function acf_maybe_get_POST($key = '', $default = \null)
 function acf_maybe_get_GET($key = '', $default = \null)
 {
 }
-/*
-*  acf_get_attachment
-*
-*  This function will return an array of attachment data
-*
-*  @type	function
-*  @date	5/01/2015
-*  @since	5.1.5
-*
-*  @param	$post (mixed) either post ID or post object
-*  @return	(array)
-*/
+/**
+ * Returns an array of attachment data.
+ *
+ * @date	05/01/2015
+ * @since	5.1.5
+ *
+ * @param	int|WP_Post The attachment ID or object.
+ * @return	array|false
+ */
 function acf_get_attachment($attachment)
 {
 }
@@ -16292,60 +16582,62 @@ function acf_get_choice_from_term($term, $format = 'term_id')
 }
 // class_exists check
 /**
-*  acf_localize_text
-*
-*  description
-*
-*  @date	13/4/18
-*  @since	5.6.9
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
+ * Appends an array of i18n data for localization.
+ *
+ * @date	13/4/18
+ * @since	5.6.9
+ *
+ * @param	array $text An array of text for i18n.
+ * @return	void
+ */
 function acf_localize_text($text)
 {
 }
 /**
-*  acf_localize_data
-*
-*  description
-*
-*  @date	13/4/18
-*  @since	5.6.9
-*
-*  @param	type $var Description. Default.
-*  @return	type Description.
-*/
+ * Appends an array of l10n data for localization.
+ *
+ * @date	13/4/18
+ * @since	5.6.9
+ *
+ * @param	array $data An array of data for l10n.
+ * @return	void
+ */
 function acf_localize_data($data)
 {
 }
-/*
-*  acf_enqueue_scripts
-*
-*  
-*
-*  @type	function
-*  @date	6/10/13
-*  @since	5.0.0
-*
-*  @param	n/a
-*  @return	n/a
-*/
+/**
+ * Enqueues a script with support for supplemental inline scripts.
+ *
+ * @date	27/4/20
+ * @since	5.9.0
+ *
+ * @param	string $name The script name.
+ * @return	void
+ */
+function acf_enqueue_script($name)
+{
+}
+/**
+ * Enqueues the input scripts required for fields.
+ *
+ * @date	13/4/18
+ * @since	5.6.9
+ *
+ * @param	array $args See ACF_Assets::enqueue_scripts() for a list of args.
+ * @return	void
+ */
 function acf_enqueue_scripts($args = array())
 {
 }
-/*
-*  acf_enqueue_uploader
-*
-*  This function will render a WP WYSIWYG and enqueue media
-*
-*  @type	function
-*  @date	27/10/2014
-*  @since	5.0.9
-*
-*  @param	n/a
-*  @return	n/a
-*/
+/**
+ * Enqueues the WP media uploader scripts and styles.
+ *
+ * @date	27/10/2014
+ * @since	5.0.9
+ *
+ * @param	void
+ * @return	void
+ */
 function acf_enqueue_uploader()
 {
 }
@@ -16630,37 +16922,6 @@ function acf_get_form($id = '')
 {
 }
 function acf_register_form($args)
-{
-}
-// class_exists check
-/*
-*  acf_write_json_field_group
-*
-*  This function will save a field group to a json file within the current theme
-*
-*  @type	function
-*  @date	5/12/2014
-*  @since	5.1.5
-*
-*  @param	$field_group (array)
-*  @return	(boolean)
-*/
-function acf_write_json_field_group($field_group)
-{
-}
-/*
-*  acf_delete_json_field_group
-*
-*  This function will delete a json field group file
-*
-*  @type	function
-*  @date	5/12/2014
-*  @since	5.1.5
-*
-*  @param	$key (string)
-*  @return	(boolean)
-*/
-function acf_delete_json_field_group($key)
 {
 }
 function determine_locale()
@@ -17105,6 +17366,43 @@ function _acf_do_prepare_local_fields()
 }
 // class_exists check
 /**
+ * Returns an array of found JSON field group files.
+ *
+ * @date	14/4/20
+ * @since	5.9.0
+ *
+ * @param	type $var Description. Default.
+ * @return	type Description.
+ */
+function acf_get_local_json_files()
+{
+}
+/**
+ * Saves a field group JSON file.
+ *
+ * @date	5/12/2014
+ * @since	5.1.5
+ *
+ * @param	array $field_group The field group.
+ * @return	bool
+ */
+function acf_write_json_field_group($field_group)
+{
+}
+/**
+ * Deletes a field group JSON file.
+ *
+ * @date	5/12/2014
+ * @since	5.1.5
+ *
+ * @param	string $key The field group key.
+ * @return	bool True on success.
+ */
+function acf_delete_json_field_group($key)
+{
+}
+// class_exists check
+/**
  * acf_setup_meta
  *
  * Adds postmeta to storage.
@@ -17132,139 +17430,150 @@ function acf_setup_meta($meta = array(), $post_id = 0, $is_main = \false)
 function acf_reset_meta($post_id = 0)
 {
 }
-// class_exists check
-/*
-*  acf_register_location_rule
-*
-*  alias of acf()->locations->register_location()
-*
-*  @type	function
-*  @date	31/5/17
-*  @since	5.6.0
-*
-*  @param	n/a
-*  @return	n/a
-*/
-function acf_register_location_rule($class)
+/**
+ * Registers a location type.
+ *
+ * @date	8/4/20
+ * @since	5.9.0
+ *
+ * @param	string $class_name The location class name.
+ * @return	(ACF_Location|false)
+ */
+function acf_register_location_type($class_name)
 {
 }
-/*
-*  acf_get_location_rule
-*
-*  alias of acf()->locations->get_location()
-*
-*  @type	function
-*  @date	31/5/17
-*  @since	5.6.0
-*
-*  @param	n/a
-*  @return	n/a
-*/
-function acf_get_location_rule($name)
+/**
+ * Returns an array of all registered location types.
+ *
+ * @date	8/4/20
+ * @since	5.9.0
+ *
+ * @param	void
+ * @return	array
+ */
+function acf_get_location_types()
 {
 }
-/*
-*  acf_get_location_rule_types
-*
-*  alias of acf()->locations->get_locations()
-*
-*  @type	function
-*  @date	31/5/17
-*  @since	5.6.0
-*
-*  @param	n/a
-*  @return	n/a
-*/
+/**
+ * Returns a location type for the given name.
+ *
+ * @date	18/2/19
+ * @since	5.7.12
+ *
+ * @param	string $name The location type name.
+ * @return	(ACF_Location|null)
+ */
+function acf_get_location_type($name)
+{
+}
+/**
+ * Returns a grouped array of all location rule types.
+ *
+ * @date	8/4/20
+ * @since	5.9.0
+ *
+ * @param	void
+ * @return	array
+ */
 function acf_get_location_rule_types()
 {
 }
 /**
-*  acf_validate_location_rule
-*
-*  Returns a valid location rule array.
-*
-*  @date	28/8/18
-*  @since	5.7.4
-*
-*  @param	$rule array The rule array.
-*  @return	array
-*/
-function acf_validate_location_rule($rule = \false)
-{
-}
-/*
-*  acf_get_location_rule_operators
-*
-*  This function will return the operators for a given rule
-*
-*  @type	function
-*  @date	30/5/17
-*  @since	5.6.0
-*
-*  @param	$rule (array)
-*  @return	(array)
-*/
-function acf_get_location_rule_operators($rule)
-{
-}
-/*
-*  acf_get_location_rule_values
-*
-*  This function will return the values for a given rule 
-*
-*  @type	function
-*  @date	30/5/17
-*  @since	5.6.0
-*
-*  @param	$rule (array)
-*  @return	(array)
-*/
-function acf_get_location_rule_values($rule)
-{
-}
-/*
-*  acf_match_location_rule
-*
-*  This function will match a given rule to the $screen
-*
-*  @type	function
-*  @date	30/5/17
-*  @since	5.6.0
-*
-*  @param	$rule (array)
-*  @param	$screen (array)
-*  @return	(boolean)
-*/
-function acf_match_location_rule($rule, $screen, $field_group)
-{
-}
-/*
-*  acf_get_location_screen
-*
-*  This function will return a valid location screen array
-*
-*  @type	function
-*  @date	30/5/17
-*  @since	5.6.0
-*
-*  @param	$screen (array)
-*  @param	$field_group (array)
-*  @return	(array)
-*/
-function acf_get_location_screen($screen = array(), $field_group = \false)
+ * Returns a validated location rule with all props.
+ *
+ * @date	8/4/20
+ * @since	5.9.0
+ *
+ * @param	array $rule The location rule.
+ * @return	array
+ */
+function acf_validate_location_rule($rule = array())
 {
 }
 /**
-*  acf_get_valid_location_rule
-*
-*  Deprecated in 5.7.4. Use acf_validate_location_rule() instead.
-*
-*  @date	30/5/17
-*  @since	5.6.0
-*
-*  @param	$rule array The rule array.
-*  @return	array
-*/
+ * Returns an array of operators for a given rule.
+ *
+ * @date	30/5/17
+ * @since	5.6.0
+ *
+ * @param	array $rule The location rule.
+ * @return	array
+ */
+function acf_get_location_rule_operators($rule)
+{
+}
+/**
+ * Returns an array of values for a given rule.
+ *
+ * @date	30/5/17
+ * @since	5.6.0
+ *
+ * @param	array $rule The location rule.
+ * @return	array
+ */
+function acf_get_location_rule_values($rule)
+{
+}
+/**
+ * Returns true if the provided rule matches the screen args.
+ *
+ * @date	30/5/17
+ * @since	5.6.0
+ *
+ * @param	array $rule The location rule.
+ * @param	array $screen The screen args.
+ * @param	array $field The field group array.
+ * @return	bool
+ */
+function acf_match_location_rule($rule, $screen, $field_group)
+{
+}
+/**
+ * Returns ann array of screen args to be used against matching rules.
+ *
+ * @date	8/4/20
+ * @since	5.9.0
+ *
+ * @param	array $screen The screen args.
+ * @param	array $deprecated The field group array.
+ * @return	array
+ */
+function acf_get_location_screen($screen = array(), $deprecated = \false)
+{
+}
+/**
+ * Alias of acf_register_location_type().
+ *
+ * @date	31/5/17
+ * @since	5.6.0
+ *
+ * @param	string $class_name The location class name.
+ * @return	(ACF_Location|false)
+ */
+function acf_register_location_rule($class_name)
+{
+}
+/**
+ * Alias of acf_get_location_type().
+ *
+ * @date	31/5/17
+ * @since	5.6.0
+ *
+ * @param	string $class_name The location class name.
+ * @return	(ACF_Location|false)
+ */
+function acf_get_location_rule($name)
+{
+}
+/**
+ * Alias of acf_validate_location_rule().
+ *
+ * @date	30/5/17
+ * @since	5.6.0
+ *
+ * @param	array $rule The location rule.
+ * @return	array
+ */
 function acf_get_valid_location_rule($rule)
 {
 }
@@ -17742,7 +18051,7 @@ function acf_remove_block_type($name)
  * @param	void
  * @return	array
  */
-function acf_get_block_type_default_attributes()
+function acf_get_block_type_default_attributes($block_type)
 {
 }
 /**
@@ -17976,6 +18285,15 @@ function acf_pro_get_license_key()
 function acf_pro_update_license($key = '')
 {
 }
+/**
+ * Filters the admin navigation tabs.
+ *
+ * @date	27/3/20
+ * @since	5.9.0
+ *
+ * @param	array $tabs The array of navigation tabs.
+ */
+$tabs = \null;
 /**
 *  html-admin-tools
 *
