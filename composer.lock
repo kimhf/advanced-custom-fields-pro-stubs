@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aadbfaad472fe511ad29b03ae236c9e2",
+    "content-hash": "006a5675e0478cff5cf98d68cb341f45",
     "packages": [],
     "packages-dev": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.9.8",
+            "version": "5.9.9",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/v2/plugins/download?p=pro&t=5.9.8"
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/download?p=pro&t=5.9.9"
             },
             "require": {
                 "composer/installers": "~1.0",
