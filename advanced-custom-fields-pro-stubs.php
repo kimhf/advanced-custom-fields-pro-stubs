@@ -3,7 +3,7 @@
 class ACF
 {
     /** @var string The plugin version number. */
-    var $version = '5.9.6';
+    var $version = '5.9.7';
     /** @var array The plugin settings array. */
     var $settings = array();
     /** @var array The plugin data array. */
@@ -9325,81 +9325,102 @@ class acf_loop
 }
 class ACF_Media
 {
-    /*
-     *  __construct
+    /**
+     * Constructor.
      *
-     *  Initialize filters, action, variables and includes
+     * @date	23/06/12
+     * @since	5.0.0
      *
-     *  @type	function
-     *  @date	23/06/12
-     *  @since	5.0.0
-     *
-     *  @param	N/A
-     *  @return	N/A
+     * @param	void
+     * @return	void
      */
-    function __construct()
+    public function __construct()
     {
     }
     /**
-     *  enqueue_scripts
+     * Fires when ACF scrtips are enqueued.
      *
-     *  Localizes data
+     * @date	27/4/18
+     * @since	5.6.9
      *
-     *  @date	27/4/18
-     *  @since	5.6.9
-     *
-     *  @param	void
-     *  @return	void
+     * @param	void
+     * @return	void
      */
-    function enqueue_scripts()
+    public function enqueue_scripts()
     {
     }
-    /*
-     *  handle_upload_prefilter
+    /**
+     * Uploads attachments found in the basic `$_FILES` array.
      *
-     *  description
+     * @date	24/10/2014
+     * @since	5.0.9
      *
-     *  @type	function
-     *  @date	16/02/2015
-     *  @since	5.1.5
-     *
-     *  @param	$post_id (int)
-     *  @return	$post_id (int)
+     * @param	string|int $post_id The post ID being saved.
+     * @return	void
      */
-    function handle_upload_prefilter($file)
+    public function save_files($post_id = 0)
     {
     }
-    /*
-     *  save_files
+    /**
+     * Filters data for the current file being uploaded.
      *
-     *  This function will save the $_FILES data
+     * @date	16/02/2015
+     * @since	5.1.5
      *
-     *  @type	function
-     *  @date	24/10/2014
-     *  @since	5.0.9
-     *
-     *  @param	$post_id (int)
-     *  @return	$post_id (int)
+     * @param	array $file An array of data for a single file.
+     * @return	array
      */
-    function save_files($post_id = 0)
+    public function handle_upload_prefilter($file)
     {
     }
-    /*
-     *  wp_ajax_query_attachments
+    /**
+     * Returns the field responsible for the current Media query or upload context.
      *
-     *  description
+     * @date	21/5/21
+     * @since	5.9.7
      *
-     *  @type	function
-     *  @date	26/06/2015
-     *  @since	5.2.3
+     * @param	void
+     * @return	array| false.
+     */
+    private function get_source_field()
+    {
+    }
+    /**
+     * Fires during the WP Modal Query AJAX call.
      *
-     *  @param	$post_id (int)
-     *  @return	$post_id (int)
+     * @date	26/06/2015
+     * @since	5.2.3
+     *
+     * @param	void
+     * @return	void
      */
     function wp_ajax_query_attachments()
     {
     }
+    /**
+     * Filters attachment data as it is being prepared for JS.
+     *
+     * @date	21/5/21
+     * @since	5.9.7
+     *
+     * @param	array $response Array of prepared attachment data.
+     * @param	WP_Post $attachment Attachment object.
+     * @param	array|false $meta Array of attachment meta data, or false if there is none.
+     * @return	array
+     */
     function wp_prepare_attachment_for_js($response, $attachment, $meta)
+    {
+    }
+    /**
+     * Filters the names and labels of the default image sizes.
+     *
+     * @date	21/5/21
+     * @since	5.9.7
+     *
+     * @param	array $size_names Array of image size labels keyed by their name.
+     * @return	array
+     */
+    function image_size_names_choose($size_names)
     {
     }
 }
@@ -15397,13 +15418,13 @@ function acf_get_valid_terms($terms = \false, $taxonomy = 'category')
 /*
 *  acf_validate_attachment
 *
-*  This function will validate an attachment based on a field's resrictions and return an array of errors
+*  This function will validate an attachment based on a field's restrictions and return an array of errors
 *
 *  @type	function
 *  @date	3/07/2015
 *  @since	5.2.3
 *
-*  @param	$attachment (array) attachment data. Cahnges based on context
+*  @param	$attachment (array) attachment data. Changes based on context
 *  @param	$field (array) field settings containing restrictions
 *  @param	$context (string) $file is different when uploading / preparing
 *  @return	$errors (array)
