@@ -3,7 +3,7 @@
 class ACF
 {
     /** @var string The plugin version number. */
-    var $version = '5.12.2';
+    var $version = '5.12.3';
     /** @var array The plugin settings array. */
     var $settings = array();
     /** @var array The plugin data array. */
@@ -16291,18 +16291,15 @@ acf_log( acf_get_post_id_info('options') );
 function acf_isset_termmeta($taxonomy = '')
 {
 }
-/*
-*  acf_upload_files
-*
-*  This function will walk througfh the $_FILES data and upload each found
-*
-*  @type    function
-*  @date    25/10/2014
-*  @since   5.0.9
-*
-*  @param   $ancestors (array) an internal parameter, not required
-*  @return  n/a
-*/
+/**
+ * This function will walk through the $_FILES data and upload each found.
+ *
+ * @date    25/10/2014
+ * @since   5.0.9
+ *
+ * @param array $ancestors An internal parameter, not required.
+ * @return void
+ */
 function acf_upload_files($ancestors = array())
 {
 }
