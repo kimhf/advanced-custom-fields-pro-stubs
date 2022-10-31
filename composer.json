@@ -30,7 +30,7 @@
     "require-dev": {
         "php": ">=7.1",
         "giacocorsiglia/stubs-generator": "^0.5",
-        "advanced-custom-fields/advanced-custom-fields-pro": "5.11.1"
+        "advanced-custom-fields/advanced-custom-fields-pro": "5.11.2"
     },
     "scripts": {
         "generate-stubs": "generate-stubs --finder=advanced-custom-fields-pro-finder.php --nullify-globals --out=advanced-custom-fields-pro-stubs.php --force"
